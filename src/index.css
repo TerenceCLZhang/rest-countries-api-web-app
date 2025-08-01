@@ -24,4 +24,12 @@
   body {
     @apply font-nunito-sans text-homepage text-gray-950 font-normal bg-gray-50;
   }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  a {
+    @apply hover:font-bold;
+  }
 }
