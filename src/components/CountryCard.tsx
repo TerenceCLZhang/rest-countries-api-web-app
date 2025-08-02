@@ -1,20 +1,24 @@
-import type { CountryBasic } from "./Main";
 import { motion } from "framer-motion";
+import type { CountryBasic } from "../pages/CountryCards";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   country: CountryBasic;
 }
 
 const CountryCard = ({ country }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <motion.article
       className="bg-white w-75 flex flex-col mx-auto shadow-xl 
-      rounded-lg overflow-hidden md:w-full md:h-full"
+      rounded-lg overflow-hidden md:w-full md:h-full cursor-pointer"
+      onClick={() => navigate(`/country/${country.name.common}`)}
       whileHover={{ scale: 1.1 }}
     >
       <div className="w-full overflow-hidden h-[170px] lg:h-[200px]">
         <img
-          src={country.flags.png}
+          src={country.flags.svg}
           alt={country.flags.alt || `${country.name.common} flag`}
           className="w-full h-full object-cover"
         />
@@ -25,11 +29,11 @@ const CountryCard = ({ country }: Props) => {
           {[
             ["Population", country.population.toLocaleString()],
             ["Region", country.region],
-            ["Capital", country.capital.join(", ")],
+            ["Capital", country.capital?.join(", ") || "N/A"],
           ].map((item, index) => (
-            <div key={index} className="flex gap-1">
+            <div key={index} className="dl-div">
               <dt>{item[0]}:</dt>
-              <dl className="font-thin">{item[1]}</dl>
+              <dd className="font-thin">{item[1]}</dd>
             </div>
           ))}
         </dl>

@@ -7,7 +7,7 @@ const Header = () => {
     justify-between md:px-10 2xl:px-50"
     >
       <h1 className="font-bold text-lg lg:text-3xl">
-        <a href="#">Where in the world?</a>
+        <a href="/">Where in the world?</a>
       </h1>
       <button className="flex items-center gap-2">
         <Moon /> <span>Dark Mode</span>

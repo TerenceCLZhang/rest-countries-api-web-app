@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import type { filterRegion } from "./Main";
+import type { filterRegion } from "../pages/CountryCards";
 
 interface Props {
   filterRegion: filterRegion;

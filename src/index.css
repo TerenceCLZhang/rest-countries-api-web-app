@@ -33,3 +33,9 @@
     @apply hover:font-bold;
   }
 }
+
+@layer components {
+  .dl-div {
+    @apply flex gap-1;
+  }
+}

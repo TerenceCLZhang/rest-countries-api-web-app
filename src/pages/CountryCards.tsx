@@ -1,18 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
-import SearchBar from "./SearchBar";
+import SearchBar from "../components/SearchBar";
 import axios from "axios";
-import CountryCard from "./CountryCard";
-import RegionFilter from "./RegionFilter";
+import CountryCard from "../components/CountryCard";
+import RegionFilter from "../components/RegionFilter";
 
 export type CountryBasic = {
   flags: {
-    png: string;
+    svg: string;
     alt?: string;
   };
   name: {
     common: string;
   };
-  capital: string[];
+  capital?: string[];
   region: string;
   population: number;
 };
@@ -25,7 +25,7 @@ export type filterRegion =
   | "Oceania"
   | null;
 
-const Main = () => {
+const CountryCards = () => {
   const [countries, setCountries] = useState<CountryBasic[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterRegion, setFilterRegion] = useState<filterRegion>(null);
@@ -51,6 +51,8 @@ const Main = () => {
       }
     };
 
+    window.scrollTo(0, 0); // Start the webpage at the top
+
     getCountriesInfo();
   }, []);
 
@@ -66,23 +68,30 @@ const Main = () => {
 
   return (
     <main className="px-4 py-8 space-y-10 md:py-10 md:px-10 2xl:px-50 lg:m-auto w-full flex-1">
-      <div className="space-y-7 md:flex md:justify-between">
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        <RegionFilter
-          filterRegion={filterRegion}
-          setFilterRegion={setFilterRegion}
-        />
-      </div>
-      <div
-        className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 
+      {countries && (
+        <>
+          <div className="space-y-7 md:flex md:justify-between">
+            <SearchBar
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
+            <RegionFilter
+              filterRegion={filterRegion}
+              setFilterRegion={setFilterRegion}
+            />
+          </div>
+          <div
+            className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 
       2xl:grid-cols-4 md:gap-15 lg:gap-10 xl:gap-15"
-      >
-        {filteredCountries.map((country, index) => (
-          <CountryCard key={index} country={country} />
-        ))}
-      </div>
+          >
+            {filteredCountries.map((country, index) => (
+              <CountryCard key={index} country={country} />
+            ))}
+          </div>
+        </>
+      )}
     </main>
   );
 };
 
-export default Main;
+export default CountryCards;
