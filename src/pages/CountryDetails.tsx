@@ -23,7 +23,7 @@ type CountryDetails = {
   region: string;
   subregion: string;
   population: number;
-  tld: string[];
+  tld?: string[];
   currencies: {
     [currencyCode: string]: {
       name: string;
@@ -91,8 +91,8 @@ const CountryDetails = () => {
             </div>
 
             <div
-              className=" space-y-10 -mt-3 flex flex-col lg:flex-row 
-            lg:justify-between lg:gap-15"
+              className="space-y-10 -mt-3 flex flex-col lg:flex-row 
+            lg:justify-between lg:gap-15 lg:space-y-0"
             >
               <dl className="space-y-3 lg:flex-1/2">
                 {[
@@ -124,17 +124,17 @@ const CountryDetails = () => {
                   },
                 ].map(({ label, value }) => (
                   <div key={label} className="dl-div">
-                    <dt className="font-bold">{label}:</dt>
+                    <dt className="font-bold whitespace-nowrap">{label}:</dt>
                     <dd className="font-thin">{value}</dd>
                   </div>
                 ))}
               </dl>
 
-              <dl className="space-y-3 flex-1/2">
+              <dl className="space-y-3 lg:flex-1/2">
                 {[
                   {
                     label: "Top Level Domain",
-                    value: countryData.tld[0],
+                    value: countryData.tld?.[0] || "N/A",
                   },
                   {
                     label: "Currencies",
@@ -148,12 +148,48 @@ const CountryDetails = () => {
                   },
                 ].map(({ label, value }) => (
                   <div key={label} className="dl-div">
-                    <dt className="font-bold">{label}:</dt>
+                    <dt className="font-bold whitespace-nowrap">{label}:</dt>
                     <dd className="font-thin">{value}</dd>
                   </div>
                 ))}
               </dl>
             </div>
+
+            <section>
+              <h3 className="text-lg font-bold mb-5">Maps:</h3>
+              <div className="flex gap-2">
+                {[
+                  {
+                    name: "Google",
+                    url: (name: string) =>
+                      `https://www.google.com/maps/place/${name}`,
+                  },
+                  {
+                    name: "Bing",
+                    url: (name: string) =>
+                      `https://www.bing.com/maps?q=${name}`,
+                  },
+                  {
+                    name: "Duck Duck Go",
+                    url: (name: string) =>
+                      `https://duckduckgo.com/?q=${name}&iaxm=maps`,
+                  },
+                ].map((service) => (
+                  <motion.a
+                    key={service.name}
+                    href={service.url(countryData.name.common)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white shadow-md rounded-lg w-fit px-5 
+                    py-3 hover:font-normal flex-1/3 flex items-center 
+                    justify-center text-center"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    {service.name}
+                  </motion.a>
+                ))}
+              </div>
+            </section>
 
             <section>
               <h3 className="text-lg font-bold mb-3">Border Countries:</h3>
@@ -166,7 +202,7 @@ const CountryDetails = () => {
                         type="button"
                         key={index}
                         onClick={() => navigate(`/country/${countryName}`)}
-                        className="bg-white shadow-md py-2 h-full w-full"
+                        className="bg-white shadow-md rounded-lg py-2 h-full w-full"
                         whileHover={{ scale: 1.05 }}
                       >
                         {countryName || borderCountry}
