@@ -5,9 +5,15 @@ const Footer = () => {
     flex justify-between"
     >
       <span>
-        Made by <a href="https://github.com/TerenceCLZhang">Terence Zhang</a>
+        Made by{" "}
+        <a href="https://github.com/TerenceCLZhang" target="_blank">
+          Terence Zhang
+        </a>
       </span>
-      <a href="https://github.com/TerenceCLZhang/rest-countries-api-web-app">
+      <a
+        href="https://github.com/TerenceCLZhang/rest-countries-api-web-app"
+        target="_blank"
+      >
         GitHub Repo
       </a>
     </footer>

@@ -3,37 +3,10 @@ import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import countryCodes from "../utils/ISO-3366-1_Alpha-3_Codes.json";
-
-type CountryDetails = {
-  flags: {
-    svg: string;
-    alt?: string;
-  };
-  name: {
-    common: string;
-    official: string;
-    nativeName: {
-      [languageCode: string]: {
-        common: string;
-      };
-    };
-  };
-  capital?: string[];
-  region: string;
-  subregion: string;
-  population: number;
-  tld?: string[];
-  currencies: {
-    [currencyCode: string]: {
-      name: string;
-    };
-  };
-  languages: {
-    [languageCode: string]: string;
-  };
-  borders: string[];
-};
+import DetailsMainDisplay from "../components/DetailsMainDisplay";
+import MapLinks from "../components/MapLinks";
+import BorderCountries from "../components/BorderCountries";
+import type { CountryDetails } from "../types/CountryTypes";
 
 const CountryDetails = () => {
   const { country } = useParams();
@@ -90,130 +63,11 @@ const CountryDetails = () => {
               </span>
             </div>
 
-            <div
-              className="space-y-10 -mt-3 flex flex-col lg:flex-row 
-            lg:justify-between lg:gap-15 lg:space-y-0"
-            >
-              <dl className="space-y-3 lg:flex-1/2">
-                {[
-                  {
-                    label: "Native Names",
-                    value: [
-                      ...new Set(
-                        Object.values(countryData.name.nativeName).map(
-                          (n) => n.common
-                        )
-                      ),
-                    ].join(", "),
-                  },
-                  {
-                    label: "Population",
-                    value: countryData.population.toLocaleString(),
-                  },
-                  {
-                    label: "Region",
-                    value: countryData.region,
-                  },
-                  {
-                    label: "Sub Region",
-                    value: countryData.subregion,
-                  },
-                  {
-                    label: "Capital",
-                    value: countryData.capital?.join(", ") || "N/A",
-                  },
-                ].map(({ label, value }) => (
-                  <div key={label} className="dl-div">
-                    <dt className="font-bold whitespace-nowrap">{label}:</dt>
-                    <dd className="font-thin">{value}</dd>
-                  </div>
-                ))}
-              </dl>
+            <DetailsMainDisplay countryData={countryData} />
 
-              <dl className="space-y-3 lg:flex-1/2">
-                {[
-                  {
-                    label: "Top Level Domain",
-                    value: countryData.tld?.[0] || "N/A",
-                  },
-                  {
-                    label: "Currencies",
-                    value: Object.values(countryData.currencies)
-                      .map((currency) => currency.name)
-                      .join(", "),
-                  },
-                  {
-                    label: "Languages",
-                    value: Object.values(countryData.languages).join(", "),
-                  },
-                ].map(({ label, value }) => (
-                  <div key={label} className="dl-div">
-                    <dt className="font-bold whitespace-nowrap">{label}:</dt>
-                    <dd className="font-thin">{value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
+            <MapLinks name={countryData.name.common} />
 
-            <section>
-              <h3 className="text-lg font-bold mb-5">Maps:</h3>
-              <div className="flex gap-2">
-                {[
-                  {
-                    name: "Google",
-                    url: (name: string) =>
-                      `https://www.google.com/maps/place/${name}`,
-                  },
-                  {
-                    name: "Bing",
-                    url: (name: string) =>
-                      `https://www.bing.com/maps?q=${name}`,
-                  },
-                  {
-                    name: "Duck Duck Go",
-                    url: (name: string) =>
-                      `https://duckduckgo.com/?q=${name}&iaxm=maps`,
-                  },
-                ].map((service) => (
-                  <motion.a
-                    key={service.name}
-                    href={service.url(countryData.name.common)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-white shadow-md rounded-lg w-fit px-5 
-                    py-3 hover:font-normal flex-1/3 flex items-center 
-                    justify-center text-center"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    {service.name}
-                  </motion.a>
-                ))}
-              </div>
-            </section>
-
-            <section>
-              <h3 className="text-lg font-bold mb-3">Border Countries:</h3>
-              {countryData.borders ? (
-                <div className="grid grid-cols-3 gap-4">
-                  {countryData.borders.map((borderCountry, index) => {
-                    const countryName = (countryCodes as any)[borderCountry];
-                    return (
-                      <motion.button
-                        type="button"
-                        key={index}
-                        onClick={() => navigate(`/country/${countryName}`)}
-                        className="bg-white shadow-md rounded-lg py-2 h-full w-full"
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        {countryName || borderCountry}
-                      </motion.button>
-                    );
-                  })}
-                </div>
-              ) : (
-                <p>This country has no bordering nations.</p>
-              )}
-            </section>
+            <BorderCountries borders={countryData.borders} />
           </div>
         </section>
       )}

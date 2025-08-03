@@ -2,33 +2,19 @@ import { useEffect, useMemo, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import axios from "axios";
 import CountryCard from "../components/CountryCard";
-import RegionFilter from "../components/RegionFilter";
-
-export type CountryBasic = {
-  flags: {
-    svg: string;
-    alt?: string;
-  };
-  name: {
-    common: string;
-  };
-  capital?: string[];
-  region: string;
-  population: number;
-};
-
-export type filterRegion =
-  | "Africa"
-  | "America"
-  | "Asia"
-  | "Europe"
-  | "Oceania"
-  | null;
+import Filter from "../components/Filter";
+import type {
+  CountryBasic,
+  SortOrder,
+  FilterRegion,
+} from "../types/CountryTypes";
 
 const CountryCards = () => {
   const [countries, setCountries] = useState<CountryBasic[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filterRegion, setFilterRegion] = useState<filterRegion>(null);
+  const [filterRegion, setFilterRegion] =
+    useState<FilterRegion>("Filter by Region");
+  const [filterOrder, setFilterOrder] = useState<SortOrder>("Name (A → Z)");
 
   useEffect(() => {
     const getCountriesInfo = async () => {
@@ -61,7 +47,10 @@ const CountryCards = () => {
       const matchesSearch = item.name.common
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
-      const matchesRegion = filterRegion ? item.region === filterRegion : true;
+      const matchesRegion =
+        filterRegion !== "Filter by Region"
+          ? item.region === filterRegion
+          : true;
       return matchesSearch && matchesRegion;
     });
   }, [countries, searchQuery, filterRegion]);
@@ -70,15 +59,36 @@ const CountryCards = () => {
     <main className="px-4 py-8 space-y-10 md:py-10 md:px-10 2xl:px-50 lg:m-auto w-full flex-1">
       {countries && (
         <>
-          <div className="space-y-7 md:flex md:justify-between">
+          <div className="space-y-7 lg:flex lg:justify-between">
             <SearchBar
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
             />
-            <RegionFilter
-              filterRegion={filterRegion}
-              setFilterRegion={setFilterRegion}
-            />
+
+            <div className="space-y-3 md:flex md:gap-2">
+              <Filter<FilterRegion>
+                filter={filterRegion}
+                setFilter={setFilterRegion}
+                items={[
+                  "Filter by Region",
+                  "Africa",
+                  "Americas",
+                  "Asia",
+                  "Europe",
+                  "Oceania",
+                ]}
+              />
+              <Filter<SortOrder>
+                filter={filterOrder}
+                setFilter={setFilterOrder}
+                items={[
+                  "Name (A → Z)",
+                  "Name (Z → A)",
+                  "Population (Low → High)",
+                  "Population (High → Low)",
+                ]}
+              />
+            </div>
           </div>
           <div
             className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 

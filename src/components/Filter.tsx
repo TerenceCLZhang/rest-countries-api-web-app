@@ -1,13 +1,19 @@
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import type { filterRegion } from "../pages/CountryCards";
+import type { SortOrder, FilterRegion } from "../types/CountryTypes";
+import { motion } from "framer-motion";
 
-interface Props {
-  filterRegion: filterRegion;
-  setFilterRegion: React.Dispatch<React.SetStateAction<filterRegion>>;
+interface Props<T extends FilterRegion | SortOrder> {
+  filter: T;
+  setFilter: React.Dispatch<React.SetStateAction<T>>;
+  items: string[];
 }
 
-const RegionFilter = ({ filterRegion, setFilterRegion }: Props) => {
+const Filter = <T extends FilterRegion | SortOrder>({
+  filter,
+  setFilter,
+  items,
+}: Props<T>) => {
   const containerRef = useRef<HTMLElement | null>(null);
   const [showOptions, setShowOptions] = useState(false);
 
@@ -29,29 +35,23 @@ const RegionFilter = ({ filterRegion, setFilterRegion }: Props) => {
   }, []);
 
   const handleChooseOption = (e: React.MouseEvent<HTMLLIElement>) => {
-    let selectedRegion = e.currentTarget.textContent;
-
-    if (selectedRegion === "Filter by Region") {
-      setFilterRegion(null);
-    } else {
-      setFilterRegion(selectedRegion as filterRegion);
-    }
-
+    let selectedRegion = e.currentTarget.textContent as T;
+    setFilter(selectedRegion);
     setShowOptions(false);
   };
 
   return (
     <section
       ref={containerRef}
-      className="w-[65%] space-y-2 relative font-thin md:w-65"
-      aria-label="Region filter dropdown"
+      className="w-[75%] space-y-2 relative font-thin lg:w-65"
+      aria-label="Filter dropdown"
     >
       <div
         className="flex bg-white px-4 py-3 gap-2 shadow-sm justify-between 
-rounded-md cursor-pointer"
+        rounded-md cursor-pointer"
         onClick={() => setShowOptions(!showOptions)}
       >
-        <span>{filterRegion || "Filter by Region"}</span>
+        <span>{filter}</span>
         <button
           type="button"
           className="border-l border-gray-400 pl-4"
@@ -63,7 +63,12 @@ rounded-md cursor-pointer"
           aria-controls="options"
           aria-haspopup="listbox"
         >
-          {showOptions ? <ChevronUp /> : <ChevronDown />}
+          <motion.div
+            animate={{ rotate: showOptions ? 180 : 0 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+          >
+            <ChevronDown />
+          </motion.div>
         </button>
       </div>
 
@@ -71,22 +76,15 @@ rounded-md cursor-pointer"
         <ul
           id="options"
           className="bg-white gap-2 shadow-sm rounded-md absolute w-full 
-          overflow-hidden"
+          overflow-hidden z-10"
         >
-          {[
-            "Filter by Region",
-            "Africa",
-            "Americas",
-            "Asia",
-            "Europe",
-            "Oceania",
-          ].map((region, index) => (
+          {items.map((item, index) => (
             <li
               key={index}
               className="cursor-pointer px-4 py-3 hover:bg-gray-200"
               onClick={handleChooseOption}
             >
-              {region}
+              {item}
             </li>
           ))}
         </ul>
@@ -95,4 +93,4 @@ rounded-md cursor-pointer"
   );
 };
 
-export default RegionFilter;
+export default Filter;

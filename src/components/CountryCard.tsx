@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import type { CountryBasic } from "../pages/CountryCards";
 import { useNavigate } from "react-router-dom";
+import type { CountryBasic } from "../types/CountryTypes";
 
 interface Props {
   country: CountryBasic;
