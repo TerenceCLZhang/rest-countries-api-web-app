@@ -14,7 +14,7 @@ const CountryCards = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterRegion, setFilterRegion] =
     useState<FilterRegion>("Filter by Region");
-  const [filterOrder, setFilterOrder] = useState<SortOrder>("Name (A → Z)");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("Name (A → Z)");
 
   useEffect(() => {
     const getCountriesInfo = async () => {
@@ -42,21 +42,39 @@ const CountryCards = () => {
     getCountriesInfo();
   }, []);
 
-  const filteredCountries = useMemo(() => {
-    return countries.filter((item) => {
+  const displayedCountries = useMemo(() => {
+    const filteredCountries = countries.filter((item) => {
+      // Search Bar
       const matchesSearch = item.name.common
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
+      // Region Selector
       const matchesRegion =
         filterRegion !== "Filter by Region"
           ? item.region === filterRegion
           : true;
       return matchesSearch && matchesRegion;
     });
-  }, [countries, searchQuery, filterRegion]);
+
+    // Sort display order of countries
+    const filteredAndSortedCountries = filteredCountries.sort((a, b) =>
+      sortOrder === "Name (A → Z)"
+        ? a.name.common.localeCompare(b.name.common)
+        : sortOrder === "Name (Z → A)"
+        ? b.name.common.localeCompare(a.name.common)
+        : sortOrder === "Population (Low → High)"
+        ? a.population - b.population
+        : b.population - a.population
+    );
+
+    return filteredAndSortedCountries;
+  }, [countries, searchQuery, filterRegion, sortOrder]);
 
   return (
-    <main className="px-4 py-8 space-y-10 md:py-10 md:px-10 2xl:px-50 lg:m-auto w-full flex-1">
+    <main
+      className="px-4 py-8 space-y-10 md:py-10 md:px-10 2xl:px-50 
+    lg:m-auto w-full flex-1"
+    >
       {countries && (
         <>
           <div className="space-y-7 lg:flex lg:justify-between">
@@ -79,24 +97,30 @@ const CountryCards = () => {
                 ]}
               />
               <Filter<SortOrder>
-                filter={filterOrder}
-                setFilter={setFilterOrder}
+                filter={sortOrder}
+                setFilter={setSortOrder}
                 items={[
                   "Name (A → Z)",
                   "Name (Z → A)",
-                  "Population (Low → High)",
                   "Population (High → Low)",
+                  "Population (Low → High)",
                 ]}
               />
             </div>
           </div>
           <div
             className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 
-      2xl:grid-cols-4 md:gap-15 lg:gap-10 xl:gap-15"
+            2xl:grid-cols-4 md:gap-15 lg:gap-10 xl:gap-15"
           >
-            {filteredCountries.map((country, index) => (
-              <CountryCard key={index} country={country} />
-            ))}
+            {displayedCountries.length > 0 ? (
+              displayedCountries.map((country, index) => (
+                <CountryCard key={index} country={country} />
+              ))
+            ) : (
+              <p className="text-center text-lg col-span-full">
+                No countries match your filters or search.
+              </p>
+            )}
           </div>
         </>
       )}

@@ -1,5 +1,6 @@
 import { Moon } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -11,9 +12,9 @@ const Header = () => {
       transition={{ delay: 0.12, type: "spring", stiffness: 30 }}
     >
       <h1 className="font-bold text-lg lg:text-3xl">
-        <a href="/" className="flex items-center gap-2">
+        <Link to={"/"} className="flex items-center gap-2">
           <img src="globe.svg" alt="logo" className="h-8" /> Where in the world?
-        </a>
+        </Link>
       </h1>
       <button className="flex items-center gap-2">
         <Moon /> <span>Dark Mode</span>
