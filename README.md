@@ -15,6 +15,7 @@ You can view the live website here.
 - **Sort countries** by name (A-Z, Z-A) and population (ascending, descending).
 - **Responsive design** for desktop and mobile devices.
 - **Detailed country pages** showing flags, official name, native names, population, region, subregion, capital, top-level domain, currencies, languages, and border countries.
+- **Visit country locations** via direct links to Google, Bing, and DuckDuckGo Maps from the details page.
 - **Dark mode toggle** for better user experience.
 
 ## Technologies Used
