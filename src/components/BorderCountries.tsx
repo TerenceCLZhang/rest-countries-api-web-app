@@ -21,7 +21,7 @@ const BorderCountries = ({ borders }: Props) => {
                 type="button"
                 key={index}
                 onClick={() => navigate(`/country/${countryName}`)}
-                className="bg-white shadow-md rounded-lg py-2 h-full w-full"
+                className="bg-white shadow-md rounded-lg py-2 h-full w-full dark:bg-blue-900"
                 whileHover={{ scale: 1.05 }}
               >
                 {countryName || borderCountry}

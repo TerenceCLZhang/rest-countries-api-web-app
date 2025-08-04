@@ -49,42 +49,44 @@ const Selector = <T extends FilterRegion | SortOrder>({
       aria-label={ariaLabel}
     >
       <div
-        className="flex bg-white px-4 py-3 gap-2 shadow-sm justify-between 
-        rounded-md cursor-pointer"
+        className="flex bg-white px-4 py-3 gap-2 shadow-sm justify-between rounded-md cursor-pointer dark:bg-blue-900"
         onClick={() => setShowOptions(!showOptions)}
       >
         <span>{getter}</span>
-        <button
-          type="button"
-          className="border-l border-gray-400 pl-4"
-          onClick={(e) => {
-            e.stopPropagation();
-            setShowOptions(!showOptions);
-          }}
-          aria-label={`${showOptions ? "Close" : "Show"} options`}
-          aria-expanded={showOptions}
-          aria-controls="options"
-          aria-haspopup="listbox"
-        >
-          <motion.div
-            animate={{ rotate: showOptions ? 180 : 0 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
+        <div className="flex gap-4">
+          <div className="border-l h-full border-gray-400" />
+          <button
+            type="button"
+            className=""
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowOptions(!showOptions);
+            }}
+            aria-label={`${showOptions ? "Close" : "Show"} options`}
+            aria-expanded={showOptions}
+            aria-controls="options"
+            aria-haspopup="listbox"
           >
-            <ChevronDown />
-          </motion.div>
-        </button>
+            <motion.div
+              animate={{ rotate: showOptions ? 180 : 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+            >
+              <ChevronDown />
+            </motion.div>
+          </button>
+        </div>
       </div>
 
       {showOptions && (
         <ul
           id="options"
-          className="bg-white gap-2 shadow-sm rounded-md absolute w-full 
-          overflow-hidden z-10"
+          className="bg-white gap-2 shadow-md rounded-md absolute w-full 
+          overflow-hidden z-10 dark:bg-blue-900"
         >
           {items.map((item, index) => (
             <li
               key={index}
-              className="cursor-pointer px-4 py-3 hover:bg-gray-200"
+              className="cursor-pointer px-4 py-3 hover:bg-gray-200 dark:hover:bg-gray-500"
               onClick={handleChooseOption}
             >
               {item}

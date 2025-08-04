@@ -30,6 +30,12 @@
   button {
     @apply cursor-pointer;
   }
+
+  a,
+  button {
+    @apply focus:outline-none focus-visible:ring-3 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-50 
+    dark:focus-visible:ring-offset-blue-900;
+  }
 }
 
 @layer components {

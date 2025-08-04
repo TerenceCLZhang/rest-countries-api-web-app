@@ -7,7 +7,10 @@ interface Props {
 
 const SearchBar = ({ searchQuery, setSearchQuery }: Props) => {
   return (
-    <section className="flex px-5 py-3 bg-white shadow-sm font-thin md:w-100 2xl:w-135 rounded-lg">
+    <section
+      className="flex px-5 py-3 bg-white shadow-sm font-thin md:w-100 2xl:w-135 
+    rounded-lg dark:bg-blue-900"
+    >
       <label htmlFor="country" className="flex gap-2 flex-1">
         <Search />
         <span className="sr-only">Search for a country</span>
@@ -16,18 +19,19 @@ const SearchBar = ({ searchQuery, setSearchQuery }: Props) => {
           type="text"
           placeholder="Search for a country..."
           value={searchQuery}
-          className="flex-1 focus:outline-transparent placeholder:text-gray-400 pr-5"
+          className="flex-1 focus:outline-none 
+          placeholder:text-gray-400 pr-5"
           onChange={(e) => setSearchQuery(e.target.value)}
+          autoComplete="off"
         />
       </label>
       {searchQuery && (
-        <button
-          type="button"
-          className="border-l border-gray-400 pl-5"
-          onClick={() => setSearchQuery("")}
-        >
-          <X />
-        </button>
+        <div className="flex gap-5">
+          <div className="border-l h-full border-gray-400" />
+          <button type="button" onClick={() => setSearchQuery("")}>
+            <X />
+          </button>
+        </div>
       )}
     </section>
   );

@@ -10,7 +10,7 @@ const BackButton = () => {
       type="button"
       onClick={() => navigate(-1)}
       className="bg-white shadow-md flex items-center space-x-2 px-7 
-        py-2 rounded-lg mb-10"
+        py-2 rounded-lg mb-10 dark:bg-blue-900"
       whileHover={{ scale: 1.1 }}
     >
       <ArrowLeft /> <span>Back</span>

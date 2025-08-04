@@ -150,8 +150,7 @@ const CountryCards = () => {
         <Loading />
       ) : (
         <div
-          className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 
-            2xl:grid-cols-4 md:gap-15 lg:gap-10 xl:gap-15"
+          className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-15 lg:gap-10 xl:gap-15 2xl:gap-20"
         >
           {error ? (
             <p className="text-center text-lg col-span-full text-red-600">

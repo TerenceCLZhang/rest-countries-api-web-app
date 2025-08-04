@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import type { CountryBasic } from "../types/CountryTypes";
 
 interface Props {
@@ -7,23 +7,24 @@ interface Props {
 }
 
 const CountryCard = ({ country }: Props) => {
-  const navigate = useNavigate();
-
   return (
-    <Link to={`/country/${country.name.common}`}>
+    <Link
+      to={`/country/${country.name.common}`}
+      className="w-75 md:w-full md:h-full mx-auto"
+    >
       <motion.article
-        className="bg-white w-75 flex flex-col mx-auto shadow-xl
-        rounded-lg overflow-hidden md:w-full md:h-full cursor-pointer"
+        className="bg-white flex flex-col shadow-xl
+        rounded-lg overflow-hidden dark:bg-blue-900"
         whileHover={{ scale: 1.1 }}
       >
-        <div className="w-full overflow-hidden h-[170px] lg:h-[200px]">
+        <div className="w-full overflow-hidden h-[170px] 2xl:h-[200px]">
           <img
             src={country.flags.svg}
             alt={country.flags.alt || `${country.name.common} flag`}
             className="w-full h-full object-cover"
           />
         </div>
-        <section className="px-5 pt-8 pb-10 space-y-2 my-auto md:py-8 md:space-y-3">
+        <section className="px-5 pt-8 pb-10 space-y-2 my-auto md:p-10 md:space-y-3">
           <h2 className="font-bold text-xl">{country.name.common}</h2>
           <dl>
             {[

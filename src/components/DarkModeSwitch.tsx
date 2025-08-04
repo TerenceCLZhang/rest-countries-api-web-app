@@ -25,22 +25,24 @@ const DarkModeSwitch = () => {
   }, [darkMode]);
 
   return (
-    <div className="flex items-center gap-4">
-      <span className="text-lg">{darkMode ? "Dark" : "Light"} Mode</span>
+    <div className="flex items-center md:gap-4">
+      <span className="text-sm md:text-lg">
+        {darkMode ? "Dark" : "Light"} Mode
+      </span>
 
       <motion.button
         type="button"
         onClick={() => setDarkMode(!darkMode)}
         animate={{ backgroundColor: darkMode ? "#1e293b" : "#facc15" }}
         transition={{ duration: 0.4 }}
-        className="rounded-full w-20 h-10 relative overflow-hidden dark:outline dark:ring-2 dark:outline-gray-50"
+        className="rounded-full w-20 h-10 relative overflow-hidden dark:border-2 dark:border-gray-50"
         aria-label={`Switch to ${darkMode ? "light" : "dark"} mode`}
         title={`Switch to ${darkMode ? "light" : "dark"} mode`}
       >
         <motion.div
           className="h-8 w-8 rounded-full absolute top-1/2 -translate-y-1/2"
           animate={{
-            left: darkMode ? "2.75rem" : "0.25rem",
+            left: darkMode ? "2.50rem" : "0.25rem",
             backgroundColor: darkMode ? "#f97316" : "#44bee4",
           }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}

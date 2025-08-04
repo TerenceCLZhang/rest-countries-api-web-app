@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="px-4 py-8 md:px-10 2xl:px-50 lg:m-auto w-full flex-1">
+      <main className="px-4 py-8 md:px-10 xl:px-25 2xl:px-50 lg:m-auto w-full flex-1">
         <Routes>
           <Route path="/" element={<CountryCards />} />
           <Route path="/country/:country" element={<CountryDetails />} />
