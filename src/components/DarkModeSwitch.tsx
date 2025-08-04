@@ -25,7 +25,7 @@ const DarkModeSwitch = () => {
   }, [darkMode]);
 
   return (
-    <div className="flex items-center md:gap-4">
+    <div className="flex flex-col md:flex-row items-center md:gap-4">
       <span className="text-sm md:text-lg">
         {darkMode ? "Dark" : "Light"} Mode
       </span>

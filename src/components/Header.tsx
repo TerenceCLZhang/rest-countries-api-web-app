@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const Header = () => {
   return (
     <motion.header
-      className="bg-white shadow-md flex items-center px-4 py-8 justify-between md:px-10 xl:px-25 2xl:px-50 dark:bg-blue-900"
+      className="bg-white shadow-md flex items-center px-4 py-8 justify-between gap-1 md:px-10 xl:px-25 2xl:px-50 dark:bg-blue-900"
       initial={{ opacity: 0, y: -200 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{

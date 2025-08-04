@@ -118,7 +118,7 @@ const CountryCards = () => {
       <div className="space-y-7 lg:flex lg:justify-between">
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
-        <div className="space-y-3 md:flex md:gap-2">
+        <div className="flex gap-2 md:gap-2">
           <Selector<FilterRegion>
             getter={filterRegion}
             setter={setFilterRegion}

@@ -45,11 +45,12 @@ const Selector = <T extends FilterRegion | SortOrder>({
   return (
     <section
       ref={containerRef}
-      className="w-[75%] space-y-2 relative font-thin lg:w-65"
+      className="w-[75%] relative font-thin lg:w-65"
       aria-label={ariaLabel}
+      title={ariaLabel}
     >
       <div
-        className="flex bg-white px-4 py-3 gap-2 shadow-sm justify-between rounded-md cursor-pointer dark:bg-blue-900"
+        className="flex bg-white h-full items-center lg:items-start lg:h-fit px-4 py-3 gap-2 shadow-sm justify-between rounded-md cursor-pointer dark:bg-blue-900"
         onClick={() => setShowOptions(!showOptions)}
       >
         <span>{getter}</span>
@@ -80,8 +81,7 @@ const Selector = <T extends FilterRegion | SortOrder>({
       {showOptions && (
         <ul
           id="options"
-          className="bg-white gap-2 shadow-md rounded-md absolute w-full 
-          overflow-hidden z-10 dark:bg-blue-900"
+          className="mt-2 bg-white gap-2 shadow-md rounded-md absolute w-full overflow-hidden z-10 dark:bg-blue-900"
         >
           {items.map((item, index) => (
             <li
