@@ -1,69 +1,38 @@
-# React + TypeScript + Vite
+# Where in the World? - A React Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Home page](assets/home.png)
 
-Currently, two official plugins are available:
+![Details page](assets/details.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A Frontend React web application which shows detailed information about countries around the world. Users can browse, search, and filter countries by region, view country details including population, capital, languages, currencies, and neighbouring countries.
 
-## Expanding the ESLint configuration
+You can view the live website here.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Search countries** by name with real-time filtering.
+- **Filter countries** by region (Africa, Americas, Asia, Europe, Oceania).
+- **Sort countries** by name (A-Z, Z-A) and population (ascending, descending).
+- **Responsive design** for desktop and mobile devices.
+- **Detailed country pages** showing flags, official name, native names, population, region, subregion, capital, top-level domain, currencies, languages, and border countries.
+- **Dark mode toggle** for better user experience.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Technologies Used
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- React
+- TypeScript
+- React Router
+- Axios
+- Tailwind CSS
+- Framer Motion
+- Lucide React
+- React Hot Toasts
+- [REST Countries API](https://restcountries.com/)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Contributions
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+This is a personal project created to showcase my skills. I am not accepting contributions at this time.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## License
+
+This project is released under the [MIT License](LICENSE). You are free to use, modify, and distribute this project in accordance with the terms of the license.

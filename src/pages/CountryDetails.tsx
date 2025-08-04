@@ -59,7 +59,7 @@ const CountryDetails = () => {
         <Loading />
       ) : error ? (
         <p className="text-center text-lg col-span-full text-red-600">
-          Failed to load country. Please try again later.
+          Failed to load country/territory. Please try again later.
         </p>
       ) : (
         countryData && (

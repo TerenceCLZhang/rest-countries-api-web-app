@@ -149,12 +149,10 @@ const CountryCards = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div
-          className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-15 lg:gap-10 xl:gap-15 2xl:gap-20"
-        >
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-15 lg:gap-10 xl:gap-15 2xl:gap-20">
           {error ? (
             <p className="text-center text-lg col-span-full text-red-600">
-              Failed to load countries. Please try again later.
+              Failed to load countries and territories. Please try again later.
             </p>
           ) : displayedCountries.length > 0 ? (
             displayedCountries.map((country, index) => (
@@ -162,7 +160,7 @@ const CountryCards = () => {
             ))
           ) : (
             <p className="text-center text-lg col-span-full">
-              No countries match your filters or search.
+              No countries or territories match your filters or search.
             </p>
           )}
         </div>
