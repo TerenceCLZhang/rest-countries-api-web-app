@@ -1,11 +1,20 @@
 import { Link } from "react-router-dom";
 import DarkModeSwitch from "./DarkModeSwitch";
+import { motion } from "framer-motion";
 
 const Header = () => {
   return (
-    <header
-      className="bg-white shadow-md flex items-center px-4 py-8 
-    justify-between md:px-10 xl:px-25 2xl:px-50 dark:bg-blue-900"
+    <motion.header
+      className="bg-white shadow-md flex items-center px-4 py-8 justify-between md:px-10 xl:px-25 2xl:px-50 dark:bg-blue-900"
+      initial={{ opacity: 0, y: -200 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        delay: 0.15,
+        type: "spring",
+        stiffness: 80,
+        damping: 12,
+        mass: 0.6,
+      }}
     >
       <h1 className="font-bold text-lg lg:text-3xl">
         <Link to="/" className="flex items-center gap-2">
@@ -36,7 +45,7 @@ const Header = () => {
         </Link>
       </h1>
       <DarkModeSwitch />
-    </header>
+    </motion.header>
   );
 };
 
