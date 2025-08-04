@@ -25,7 +25,7 @@ export type SortOrder =
   | "Population (Low → High)"
   | "Population (High → Low)";
 
-export type CountryDetails = {
+export type CountryDetailed = {
   flags: {
     svg: string;
     alt?: string;

@@ -6,13 +6,18 @@ const Footer = () => {
     >
       <span>
         Made by{" "}
-        <a href="https://github.com/TerenceCLZhang" target="_blank">
+        <a
+          href="https://github.com/TerenceCLZhang"
+          target="_blank"
+          className="hover:font-bold"
+        >
           Terence Zhang
         </a>
       </span>
       <a
         href="https://github.com/TerenceCLZhang/rest-countries-api-web-app"
         target="_blank"
+        className="hover:font-bold"
       >
         GitHub Repo
       </a>

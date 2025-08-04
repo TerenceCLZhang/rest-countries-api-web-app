@@ -30,8 +30,7 @@ const MapLinks = ({ name }: Props) => {
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white shadow-md rounded-lg w-fit px-5 
-                    py-2 hover:font-normal flex-1/3 flex items-center 
-                    justify-center text-center"
+                    py-2 flex-1/3 flex items-center justify-center text-center"
             whileHover={{ scale: 1.05 }}
           >
             {service.name}

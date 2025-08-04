@@ -4,15 +4,17 @@ import type { SortOrder, FilterRegion } from "../types/CountryTypes";
 import { motion } from "framer-motion";
 
 interface Props<T extends FilterRegion | SortOrder> {
-  filter: T;
-  setFilter: React.Dispatch<React.SetStateAction<T>>;
+  getter: T;
+  setter: React.Dispatch<React.SetStateAction<T>>;
   items: string[];
+  ariaLabel: string;
 }
 
-const Filter = <T extends FilterRegion | SortOrder>({
-  filter,
-  setFilter,
+const Selector = <T extends FilterRegion | SortOrder>({
+  setter,
+  getter,
   items,
+  ariaLabel,
 }: Props<T>) => {
   const containerRef = useRef<HTMLElement | null>(null);
   const [showOptions, setShowOptions] = useState(false);
@@ -36,7 +38,7 @@ const Filter = <T extends FilterRegion | SortOrder>({
 
   const handleChooseOption = (e: React.MouseEvent<HTMLLIElement>) => {
     let selectedRegion = e.currentTarget.textContent as T;
-    setFilter(selectedRegion);
+    setter(selectedRegion);
     setShowOptions(false);
   };
 
@@ -44,14 +46,14 @@ const Filter = <T extends FilterRegion | SortOrder>({
     <section
       ref={containerRef}
       className="w-[75%] space-y-2 relative font-thin lg:w-65"
-      aria-label="Filter dropdown"
+      aria-label={ariaLabel}
     >
       <div
         className="flex bg-white px-4 py-3 gap-2 shadow-sm justify-between 
         rounded-md cursor-pointer"
         onClick={() => setShowOptions(!showOptions)}
       >
-        <span>{filter}</span>
+        <span>{getter}</span>
         <button
           type="button"
           className="border-l border-gray-400 pl-4"
@@ -59,6 +61,7 @@ const Filter = <T extends FilterRegion | SortOrder>({
             e.stopPropagation();
             setShowOptions(!showOptions);
           }}
+          aria-label={`${showOptions ? "Close" : "Show"} options`}
           aria-expanded={showOptions}
           aria-controls="options"
           aria-haspopup="listbox"
@@ -93,4 +96,4 @@ const Filter = <T extends FilterRegion | SortOrder>({
   );
 };
 
-export default Filter;
+export default Selector;

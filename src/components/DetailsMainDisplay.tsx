@@ -1,7 +1,7 @@
-import type { CountryDetails } from "../types/CountryTypes";
+import type { CountryDetailed } from "../types/CountryTypes";
 
 interface Props {
-  countryData: CountryDetails;
+  countryData: CountryDetailed;
 }
 
 const DetailsMainDisplay = ({ countryData }: Props) => {
