@@ -22,6 +22,7 @@ const CountryCard = ({ country }: Props) => {
             src={country.flags.svg}
             alt={country.flags.alt || `${country.name.common} flag`}
             className="w-full h-full object-cover"
+            loading="lazy"
           />
         </div>
         <section className="px-5 pt-8 pb-10 space-y-2 my-auto md:p-10 md:space-y-3">
