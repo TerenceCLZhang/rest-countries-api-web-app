@@ -4,9 +4,9 @@
 
 ![Details page](assets/details.png)
 
-A Frontend React web application which shows detailed information about countries around the world. Users can browse, search, and filter countries by region, view country details including population, capital, languages, currencies, and neighbouring countries.
+A Frontend React web application which shows detailed information about countries around the world. Users can browse, search, and filter countries by region, view country details including population, capital, languages, currencies, and neighbouring countries. You can view the [live website here](https://terenceclzhang-rest-countries.netlify.app).
 
-You can view the live website here.
+This project was insipired by the [Frontend Mentor REST Countries API with color theme switcher challenge](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca).
 
 ## Features
 
