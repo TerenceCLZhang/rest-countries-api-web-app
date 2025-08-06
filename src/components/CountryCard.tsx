@@ -10,11 +10,10 @@ const CountryCard = ({ country }: Props) => {
   return (
     <Link
       to={`/country/${country.name.common}`}
-      className="w-75 md:w-full md:h-full mx-auto"
+      className="w-75 md:w-full h-full mx-auto"
     >
       <motion.article
-        className="bg-white flex flex-col shadow-xl
-        rounded-lg overflow-hidden dark:bg-blue-900"
+        className="bg-white flex flex-col shadow-xl rounded-lg overflow-hidden dark:bg-blue-900 h-full"
         whileHover={{ scale: 1.1 }}
       >
         <div className="w-full overflow-hidden h-[170px] 2xl:h-[200px]">
