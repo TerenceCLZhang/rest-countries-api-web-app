@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 interface Props<T extends FilterRegion | SortOrder> {
   getter: T;
   setter: React.Dispatch<React.SetStateAction<T>>;
-  items: string[];
+  items: T[];
   ariaLabel: string;
 }
 
