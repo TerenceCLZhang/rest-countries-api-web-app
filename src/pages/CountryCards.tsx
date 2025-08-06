@@ -126,6 +126,7 @@ const CountryCards = () => {
               "Filter by Region",
               "Africa",
               "Americas",
+              "Antarctic",
               "Asia",
               "Europe",
               "Oceania",

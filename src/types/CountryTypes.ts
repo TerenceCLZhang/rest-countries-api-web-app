@@ -13,7 +13,8 @@ export type CountryBasic = {
 
 export type FilterRegion =
   | "Africa"
-  | "America"
+  | "Americas"
+  | "Antarctic"
   | "Asia"
   | "Europe"
   | "Oceania"
